@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Button from './Button';
+import DataLoader from './DataLoader';
 
 function App() {
+  //this.state = { buttonText: "Click me, please" }
+  const [buttonText, setButonText] = useState("NEW VERSION: Click me, please");
+
+  function handleClick() {
+    return setButonText("Thanks, been clicked!");
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +27,21 @@ function App() {
         >
           Learn React
         </a>
+        <Button />
+        <button onClick={handleClick}>{ buttonText }</button>
+        <DataLoader
+          render={data => {
+            return (
+              <div>
+                <ul>
+                  {data.map(el => (
+                    <li key={el.id}>{el.name}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+          }}
+        />
       </header>
     </div>
   );
